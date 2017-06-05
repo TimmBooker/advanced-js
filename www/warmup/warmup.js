@@ -31,5 +31,41 @@
    * text content of the clicked <li> element.
    */
 
+   var changeButton = document.getElementById('the-button'),
+      inputField = document.getElementById('new-text'),
+      h1Element = document.getElementsByTagName('h1')[0],
+      historyList = document.getElementById('history');
+
+   changeButton.addEventListener('click', function(e) {
+
+      // could have also just returned false
+      e.preventDefault();
+
+      console.log('Clicked');
+
+      if (!inputField.value) {
+         return false;
+      }
+
+      h1Element.innerHTML = inputField.value;
+
+      // Bonus 1: we could set the inner HTML
+      //historyList.innerHTML = historyList.innerHTML + '<li>' + inputField.value + '</li>';
+
+      // Bonus 1: or go through the process of creating and appending new nodes
+      var newLiNode = document.createElement('li');
+      var newTextNode = document.createTextNode(inputField.value);
+      newLiNode.appendChild(newTextNode);
+      historyList.prepend(newLiNode); // prepend() is not ie-safe
+
+      // Bonus 2:
+      newLiNode.addEventListener('click', function(e) {
+         h1Element.innerHTML = this.innerText;
+      });
+
+      inputField.value = null;
+
+   });
+
 
 })();

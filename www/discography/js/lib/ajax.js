@@ -25,24 +25,69 @@
  *
  */
 Ajax = (function(){
+
+  /**
+   * raw
+   * Likely abstraction for the raw ajax request
+   *
+   * @return {Promise}
+   */
   var raw = function(url, method, data) {
-    // Return a promise.
+
+    var ajaxPromise = new Promise(function(resolve, reject) {
+
+      var req = new XMLHttpRequest();
+
+      req.addEventListener("load", function(e) {
+
+        if (req.status >= 200 && req.status < 300) {
+          resolve(JSON.parse(req.responseText || "null"));
+        }
+
+        reject(req.status);
+
+      });
+
+      req.addEventListener("error", function() {
+        reject("Something went wrong with the request");
+      });
+
+      req.open(method, url);
+      req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      req.send(data && JSON.stringify(data));
+
+    });
+
+    return ajaxPromise;
+
   };
 
   // HTTP GET (Fetch resource).
   var get = function(url) {
+
+    return raw(url, 'GET');
+
   };
 
   // HTTP POST (Create new resource).
   var post = function(url, data) {
+
+    return raw(url, 'POST', data);
+
   };
 
   // HTTP PATCH (Update existing resource).
   var patch = function(url, data) {
+
+    return raw(url, 'PATCH', data);
+
   };
 
   // HTTP DELETE (Delete existing resource).
   var destroy = function(url) {
+
+    return raw(url, 'DELETE');
+
   };
 
   // Public interface here:

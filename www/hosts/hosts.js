@@ -51,4 +51,47 @@
  *
  * Make sure your tests still pass.
  */
-Hosts = undefined;
+Hosts = (function(){
+
+	// privately scoped :D
+	var hosts = {};
+
+	var api = {
+		add: function(hostName, ip) {
+			ips = hosts[hostName] || [];
+
+			if (ips.indexOf(ip) < 0) {
+				ips.push(ip);
+			}
+
+			hosts[hostName] = ips;
+		},
+		lookupByName: function(hostName) {
+			return hosts[hostName] || [];
+		},
+		lookupByIP: function(ip) {
+			var matchingHosts = [];
+
+			for (var hostName in hosts) {
+				if (hosts[hostName].indexOf(ip) >= 0) {
+					matchingHosts.push(hostName);
+					continue; // don't need to keep searching
+				}
+			}
+
+			return  matchingHosts;
+		},
+		clear: function() {
+			hosts = {};
+		}
+	};
+
+	Object.defineProperty(api, 'length', {
+	  get: function() { return Object.keys(hosts).length; },
+	  enumerable: true,
+	  configurable: false
+	});
+
+	return api;
+
+})();

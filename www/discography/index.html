@@ -8,7 +8,7 @@
     <h1>Discography</h1>
 
     <!-- This is where we're going to insert the view -->
-    <div id="view"></div>
+    <div id="view">Hi</div>
 
     <!-- Bring in our JavaScript files -->
     <script src="js/vendor/mustache.min.js"></script>
@@ -22,11 +22,35 @@
     <script src="js/controllers/artists_controller.js"></script>
     <script src="js/controllers/albums_controller.js"></script>
 
+    <script id="my-template" type="x-tmpl-mustache">
+      Hello {{name}}!
+    </script>
+
+    <script id="artists-template" type="x-tmpl-mustache">
+      <ul id="artists-list">
+      {{#artists}}
+        <li><a href="#" data-id="{{id}}">{{name}}</a></li>
+      {{/artists}}
+      </ul>
+    </script>
+
+    <script id="artist-template" type="x-tmpl-mustache">
+      <h1>{{name}}</h1>
+    </script>
+
     <!-- Bootstrap the application -->
     <script>
       (function() {
         ArtistsController.index();
+
+        // testing the View
+        //var templateText = View.get('my-template');
+        //console.log(templateText);
+        //View.set('my-template', {name: 'Ryan'});
+
       })();
+
+
     </script>
   </body>
 </html>
