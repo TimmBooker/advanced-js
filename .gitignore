@@ -1,3 +1,4 @@
 /node_modules
 /VERSION
 /babel/es5/*.js
+.DS_Store
