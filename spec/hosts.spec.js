@@ -16,39 +16,47 @@ describe("Hosts", function() {
   });
 
   /****************************************************************************/
-  it("lookupByName should return an array on empty query", function() {
-    var result = Hosts.lookupByName("shouldbeempty");
+  describe("lookupByName", function() {
 
-    expect(Array.isArray(result)).toBe(true);
-    expect(result.length).toBe(0);
+    it("should return an array on empty query", function() {
+      var result = Hosts.lookupByName("shouldbeempty");
+
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBe(0);
+    });
+
+    /****************************************************************************/
+    it("should return multiple IP addresses", function() {
+      var result = Hosts.lookupByName("foobar");
+
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBe(2);
+      expect(result).toEqual(jasmine.arrayContaining(["192.168.1.2"]));
+      expect(result).toEqual(jasmine.arrayContaining(["192.168.1.3"]));
+    });
+
   });
 
-  /****************************************************************************/
-  it("lookupByName should return multiple IP addresses", function() {
-    var result = Hosts.lookupByName("foobar");
+  describe("lookupByIP", function() {
 
-    expect(Array.isArray(result)).toBe(true);
-    expect(result.length).toBe(2);
-    expect(result).toEqual(jasmine.arrayContaining(["192.168.1.2"]));
-    expect(result).toEqual(jasmine.arrayContaining(["192.168.1.3"]));
-  });
+    /****************************************************************************/
+    it("should return an array on empty query", function() {
+      var result = Hosts.lookupByIP("0.0.0.0");
 
-  /****************************************************************************/
-  it("lookupByIP should return an array on empty query", function() {
-    var result = Hosts.lookupByIP("0.0.0.0");
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBe(0);
+    });
 
-    expect(Array.isArray(result)).toBe(true);
-    expect(result.length).toBe(0);
-  });
+    /****************************************************************************/
+    it("should result multiple names", function() {
+      var result = Hosts.lookupByIP("127.0.0.1");
 
-  /****************************************************************************/
-  it("lookupByIP should result multiple names", function() {
-    var result = Hosts.lookupByIP("127.0.0.1");
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBe(2);
+      expect(result).toEqual(jasmine.arrayContaining(["localhost"]));
+      expect(result).toEqual(jasmine.arrayContaining(["myname"]));
+    });
 
-    expect(Array.isArray(result)).toBe(true);
-    expect(result.length).toBe(2);
-    expect(result).toEqual(jasmine.arrayContaining(["localhost"]));
-    expect(result).toEqual(jasmine.arrayContaining(["myname"]));
   });
 
   /****************************************************************************/
@@ -59,6 +67,21 @@ describe("Hosts", function() {
     if ("length" in Hosts) names.push("length");
     expect(keys.length).toBe(names.length);
     expect(keys).toEqual(jasmine.arrayContaining(names));
+  });
+
+  /****************************************************************************/
+  describe("clear", function() {
+
+    it("should clear all hosts and ips", function() {
+      Hosts.clear();
+
+      var lookupByNameResult = Hosts.lookupByName("foobar");
+      var lookupByIPResult = Hosts.lookupByIP("127.0.0.1");
+
+      expect(lookupByNameResult.length).toBe(0);
+      expect(lookupByIPResult.length).toBe(0);
+    });
+
   });
 
   /****************************************************************************/

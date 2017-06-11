@@ -10,6 +10,7 @@ require("../www/discography/js/lib/promise.js");
 /******************************************************************************/
 
 describe("Artist model interface", function() {
+
   it("fetchOne should provide one artist", function(done) {
     // Some test data:
     var record = {name: "The Wombats"};
@@ -26,4 +27,5 @@ describe("Artist model interface", function() {
       done.fail("shouldn't have failed");
     });
   });
+
 });

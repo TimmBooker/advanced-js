@@ -6,6 +6,13 @@ describe("Ajax interface", function() {
     expect(Ajax.get).toBeDefined();
   });
 
+  describe("get", function() {
+    it("should return a promise", function() {
+      var promise = Ajax.get('/foo');
+      expect(promise).toEqual(jasmine.any(Promise));
+    });
+  });
+
   /****************************************************************************/
   it("get method should resolve promise", function(done) {
     XMLHttpRequest.withResponse(function(response) {

@@ -8,7 +8,7 @@
  *   add(name, address) - A function that takes two arguments, a host
  *                        name and an IP address.  The function should
  *                        record that the given host has the specified
- *                        IP address.
+ *                        IP address. Take note a host may have multiple ips.
  *
  *  lookupByName(name)  - A function that returns all IP addresses
  *                        associated with the given host name.  If the

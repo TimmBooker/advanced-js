@@ -7,10 +7,12 @@
    *
    * 2. If the text input is blank then nothing changes.
    *
-   * 3. The contents of the <h1> element are replaced with the contents
+   * 3. Otherwise the contents of the <h1> element are replaced with the contents
    *    of the text input.
    *
-   * 4. The text input is cleared.
+   * 4. And the text input is cleared.
+   *
+   * 5. The user remains on the page in both cases.
    *
    * BONUS 1:
    *
