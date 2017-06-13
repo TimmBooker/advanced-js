@@ -1,7 +1,9 @@
 # Advanced JavaScript Exercises and Demos
 
 This is the source code for the Advanced JavaScript course taught by
-[Peter J. Jones][pjones].
+[Ryan Morris][mrmorris]. 
+
+Content is based off material developed by [Peter Jones] [pjones].
 
 ## Prerequisites
 
@@ -29,3 +31,4 @@ following command:
 
 [pjones]: http://www.devalot.com/about/pjones.html
 [node.js]: https://nodejs.org/
+[mrmorris]: https://github.com/mrmorris
