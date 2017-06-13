@@ -25,27 +25,54 @@
  *
  */
 Ajax = (function(){
+
+  /**
+   * raw
+   * abstraction for the actual XHR request
+   *
+   * @return Promise
+   */
   var raw = function(url, method, data) {
     // Return a promise.
   };
 
-  // HTTP GET (Fetch resource).
+  /**
+   * get
+   * makes HTTP GET request to a given URL
+   *
+   * @return Promise
+   */
   var get = function(url) {
   };
 
-  // HTTP POST (Create new resource).
+  /**
+   * post
+   * makes HTTP POST request to a given URL to create a resource
+   *
+   * @return Promise
+   */
   var post = function(url, data) {
   };
 
-  // HTTP PATCH (Update existing resource).
+  /**
+   * patch
+   * makes HTTP PATCH request to a given URL to update existing resource
+   *
+   * @return Promise
+   */
   var patch = function(url, data) {
   };
 
-  // HTTP DELETE (Delete existing resource).
+  /**
+   * destroy
+   * makes HTTP DELETE request to a given URL to delete existing resource
+   *
+   * @return Promise
+   */
   var destroy = function(url) {
   };
 
-  // Public interface here:
+  // Our public interface
   return {
     get:     get,
     post:    post,
