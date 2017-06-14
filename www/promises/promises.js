@@ -19,9 +19,22 @@
 
 function callLater(fn, ms) {
 
-	// implement me...
+	//return a promise
+	return new Promise(function(resolve, reject) {
+		setTimeout(function() {
+			fn();
+			resolve();
+		}, ms);
+	});
 
 }
 
 // test me here...
 // callLater();
+var prom = callLater(function() {
+	console.log('Hi');
+}, 1000);
+
+prom.then(function() {
+	console.log('Hi 2');
+})

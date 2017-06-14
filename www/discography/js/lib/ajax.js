@@ -33,7 +33,33 @@ Ajax = (function(){
    * @return Promise
    */
   var raw = function(url, method, data) {
-    // Return a promise.
+
+    var prom = new Promise(function(fulfill, reject) {
+
+      var req = new XMLHttpRequest();
+
+      req.addEventListener("load", function(e) {
+        if (req.status >= 200 && req.status < 300) {
+          fulfill(JSON.parse(req.responseText));
+        }
+        reject(req.status);
+      });
+
+      req.addEventListener("error", function() {
+        reject("Something went wrong with the request");
+      });
+
+      req.open(method, url);
+      req.setRequestHeader(
+        "Content-Type",
+        "application/json;charset=UTF-8"
+      );
+
+      req.send(JSON.stringify(data));
+    });
+
+    return prom;
+
   };
 
   /**
@@ -43,6 +69,7 @@ Ajax = (function(){
    * @return Promise
    */
   var get = function(url) {
+    return raw(url, 'GET');
   };
 
   /**
@@ -52,6 +79,7 @@ Ajax = (function(){
    * @return Promise
    */
   var post = function(url, data) {
+    return raw(url, 'POST', data);
   };
 
   /**
@@ -61,6 +89,7 @@ Ajax = (function(){
    * @return Promise
    */
   var patch = function(url, data) {
+    return raw(url, 'PATCH', data);
   };
 
   /**
@@ -70,6 +99,7 @@ Ajax = (function(){
    * @return Promise
    */
   var destroy = function(url) {
+    return raw(url, 'DELETE');
   };
 
   // Our public interface

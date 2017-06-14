@@ -10,6 +10,21 @@
     <!-- This is where we're going to insert the view -->
     <div id="view"></div>
 
+    <!-- templates -->
+    <script id="artist-list-template" type="x-tmpl-mustache">
+      <ul>
+      {{#artists}}
+        <li data-id="{{id}}">{{name}}</li>
+      {{/artists}}
+      </ul>
+    </script>
+
+    <script id="artist-view-template" type="x-tmpl-mustache">
+      <div>
+      <h1>{{name}}</h1>
+      </div>
+    </script>
+
     <!-- Bring in our JavaScript files -->
     <script src="js/vendor/mustache.min.js"></script>
     <script src="js/lib/promise.js"></script>

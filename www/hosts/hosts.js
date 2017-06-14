@@ -51,4 +51,60 @@
  *
  * Make sure your tests still pass.
  */
-Hosts = undefined;
+Hosts = (function() {
+
+	var data = {}; // new Map()
+	var length = 0;
+
+	var api = {
+		add: function(name, address) {
+			if (!data[name]) {
+				data[name] = [];
+				length++;
+			}
+
+			data[name].push(address);
+		},
+		lookupByName: function(name) {
+			for (var prop in data) {
+				if (prop === name) {
+					return data[prop];
+				}
+			}
+			return [];
+		},
+		lookupByIP: function(ip) {
+			var results = [];
+
+			for (var prop in data) {
+				if (data[prop].indexOf(ip) >= 0) {
+					results.push(prop);
+				}
+			}
+			return results;
+		},
+		clear: function() {
+			data = {}
+		}
+	}
+
+	// do the defineProperty()
+	// Hosts.length
+	Object.defineProperty(api, 'length', {
+		get: function() {
+			return length;
+		}
+	});
+
+	return api;
+
+})();
+
+
+
+
+
+
+
+
+
