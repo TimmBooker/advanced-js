@@ -10,13 +10,14 @@
  * modified, propagated, or distributed except according to the terms
  * contained in the LICENSE file.
 */
+var parseArgs = require('minimist')(process.argv.slice(2));
 
 /******************************************************************************/
 // Main entry point.
 (function() {
   "use strict";
 
-  var port = 3000,
+  var port = parseArgs.port || 3000,
       www  = "./www",
       data = "./data";
 
