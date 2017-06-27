@@ -1,13 +1,12 @@
 View = (function() {
 
+  var viewElement = document.getElementById('view');
+
   // Fetch a template based on its ID from the HTML page.  Return the
   // text content of the template without rendering it.
   var get = function(templateID) {
     var node = document.getElementById(templateID);
-
-    if (node) {
-      return document.getElementById(templateID).innerHTML;
-    }
+    return node && node.innerHTML;
   };
 
   // Render a single object using the given template.
@@ -21,8 +20,6 @@ View = (function() {
   // template text into the `<div id="view"></div>' section of
   // index.html.
   var set = function(templateID, object) {
-    var viewElement = document.getElementById('view');
-
     viewElement.innerHTML = render(
       get(templateID),
       object
